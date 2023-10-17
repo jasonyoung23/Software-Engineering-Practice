@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>images/cheese.png</file>
+        <file>images/milk.png</file>
+        <file>images/steak.png</file>
+        <file>images/wall.png</file>
+        <file>images/road.png</file>
+        <file>images/jerry.png</file>
+        <file>images/tom.png</file>
+        <file>images/cheeseinvert.png</file>
+        <file>images/milkinvert.png</file>
+        <file>images/steakinvert.png</file>
+        <file>images/flash.png</file>
+        <file>images/shuffle.png</file>
+        <file>images/time.png</file>
+    </qresource>
+</RCC>

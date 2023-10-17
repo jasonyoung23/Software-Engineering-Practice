@@ -1,0 +1,172 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <iostream>
+#include <fstream>
+#include <limits.h>
+#include <vector>
+#include <queue>
+#include <algorithm>
+
+#include "Tree.h"
+
+using namespace std;
+
+/****************************************************************
+*                    Write your code below
+****************************************************************/
+ostream &operator<<(ostream &out, const TreeNode &b) {
+  // TODO: Your code here
+  return out;
+}
+
+TreeNode::TreeNode(){
+  data[0] = 0;
+  data[1] = 0;
+  left = NULL;
+  right = NULL;
+}
+
+TreeNode::TreeNode(int a, int b){
+  data[0] = a;
+  data[1] = b;
+  left = NULL;
+  right = NULL;
+}
+
+
+int TreeNode::getX() {
+  // TODO: Your code here
+  return data[0];
+}
+
+int TreeNode::getY() {
+  // TODO: Your code here
+  return data[1];
+}
+
+TreeNode::~TreeNode() {
+  // TODO: Your code here
+}
+
+TreeNode *insertTree(int a, int b, TreeNode *rt, int level){
+  //cout << "Level :" << level << endl;
+  if(rt == NULL){
+      // cout << "Masuk if NULL " << a << "dan" << b << endl;
+      rt = new TreeNode(a,b);
+      return rt;
+  }
+  else{
+      if(level % 2 == 0){
+          // cout << "Masuk if level genap" << endl;
+          if(a <= rt -> data[0]){
+              rt -> left = insertTree(a,b,rt->left,level+1);
+          }
+          else{
+              rt -> right = insertTree(a,b,rt->right,level+1);
+          }
+      }
+      else{
+          // cout << "Masuk if level ganjil" << endl;
+          if(b <= rt -> data[1]){
+              rt -> left = insertTree(a,b,rt->left,level+1);
+          }
+          else{
+              rt -> right = insertTree(a,b,rt->right,level+1);
+          }
+      }
+      return rt;
+  }
+}
+
+istream &operator>>(istream &in, BinaryDimonTree &tree) {
+  // TODO: Your code here
+  int m = 0, a, b;
+  in >> m;
+  for(int i = 0; i < m; i++){
+      in >> a >> b;
+      tree.root = insertTree(a, b, tree.root, 0);
+  }
+  return in;
+}
+
+BinaryDimonTree::BinaryDimonTree() {
+  // TODO: Your code here
+  root = NULL;
+}
+
+double BinaryDimonTree::distance(TreeNode *a, TreeNode *b){
+  double dist = sqrt(pow(a -> getX() - b -> getX(),2) + pow(a -> getY() - b -> getY(),2));
+  return dist;
+}
+
+TreeNode *BinaryDimonTree::find_nearest_node(int x, int y) {
+  // TODO: Your code here
+  TreeNode *guess = NULL;
+  double best_dist = 99999999;
+  recur_search(root, x, y, best_dist, &guess);
+  return guess;
+}
+void BinaryDimonTree::recur_search(TreeNode *cur, int x, int y, double &min_distance, TreeNode **guess) {
+  // TODO: Your code here
+  TreeNode *a = new TreeNode(x,y);
+  if(cur == NULL){
+     return;
+  }
+  double dist = distance(cur, a);
+  if((dist <= min_distance) ||
+     (dist == min_distance && cur -> getX() < (*guess) -> getX()) ||
+     (dist == min_distance && cur -> getX() == (*guess) -> getX() && cur -> getY() == (*guess) -> getY())){
+      min_distance = dist;
+      *guess = cur;
+  }
+  int lvl = cur -> level;
+  if(a -> data[lvl] < cur -> data[lvl]){
+      recur_search(cur -> left, x, y, min_distance, guess);
+  }else{
+      recur_search(cur -> right, x, y, min_distance, guess);
+  }
+
+  if(abs(cur -> data[lvl] - a -> data[lvl]) < min_distance){
+      if(a -> data[lvl] < cur -> data[lvl]){
+          recur_search(cur -> right, x, y, min_distance, guess);
+      }
+      else{
+          recur_search(cur -> left, x, y, min_distance, guess);
+      }
+  }
+}
+
+BinaryDimonTree::~BinaryDimonTree()
+{
+  // TODO: Your code here
+}
+
+void BinaryDimonTree::postOrder(TreeNode *root){
+  if(root == NULL){
+      return;
+  }
+  postOrder(root -> left);
+  postOrder(root -> right);
+  cout << "[" << root -> data[0] << "|" << root -> data[1] << "] ->";
+}
+
+void BinaryDimonTree::inOrder(TreeNode *root){
+  if(root == NULL){
+      return;
+  }
+  inOrder(root -> left);
+  cout << "[" << root -> data[0] << "|" << root -> data[1] << "] ->";
+  inOrder(root -> right);
+}
+
+void BinaryDimonTree::preOrder(TreeNode *root){
+  if(root == NULL){
+      return;
+  }
+  cout << "[" << root -> data[0] << "|" << root -> data[1] << "] ->";
+  preOrder(root -> left);
+  preOrder(root -> right);
+}
+
+
