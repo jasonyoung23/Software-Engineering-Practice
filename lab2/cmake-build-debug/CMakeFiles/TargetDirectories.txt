@@ -1,0 +1,4 @@
+D:/SJTU/Sem 2/DS Lab/lab2/cmake-build-debug/CMakeFiles/lab2lib.dir
+D:/SJTU/Sem 2/DS Lab/lab2/cmake-build-debug/CMakeFiles/lab2.dir
+D:/SJTU/Sem 2/DS Lab/lab2/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/SJTU/Sem 2/DS Lab/lab2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
