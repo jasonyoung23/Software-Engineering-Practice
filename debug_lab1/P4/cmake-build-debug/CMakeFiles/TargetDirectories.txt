@@ -1,3 +1,0 @@
-D:/SJTU/Sem 3/DS Lab/debug_lab/P4/cmake-build-debug/CMakeFiles/p4.dir
-D:/SJTU/Sem 3/DS Lab/debug_lab/P4/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/SJTU/Sem 3/DS Lab/debug_lab/P4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
